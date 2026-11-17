@@ -1,78 +1,27 @@
-# DropTidy
+<div align="center">
+  <h1>DropTidy v0.1.0</h1>
+  <p><strong>A fast, open-source Windows Downloads organizer built with Rust, Tauri v2, and React.</strong></p>
+  <p>
+    <img src="https://shields.io" alt="Windows" />
+    <img src="https://shields.io" alt="Tauri v2" />
+    <img src="https://shields.io" alt="License" />
+  </p>
+</div>
 
-A production-quality Windows desktop app that safely organizes your Downloads
-folder — built with **Tauri v2**, **Rust**, **React**, **TypeScript**, and
-**Tailwind CSS v3**.
+<hr />
 
-## Features
+<h2>Key Features</h2>
+<ul>
+  <li><strong>Safe Dry-Run Preview:</strong> Review every file, size, category, and exact destination path before moving anything. Toggle individual files or entire categories on or off.</li>
+  <li><strong>Smart Extension Categorization:</strong> Automatically groups top-level files into <code>Installers</code>, <code>Archives</code>, <code>Documents</code>, <code>Images</code>, <code>Media</code>, <code>Code</code>, and <code>Other</code> while ignoring subfolders and active browser downloads (<code>.crdownload</code>, <code>.part</code>, <code>.tmp</code>, <code>.opdownload</code>).</li>
+  <li><strong>SHA-256 Duplicate Detection:</strong> Uses two-stage partial-to-full SHA-256 hashing to flag identical downloads right in the preview table.</li>
+  <li><strong>One-Click SQLite Undo:</strong> Every sort batch is logged locally in SQLite. Click <strong>Undo Last Sort</strong> anytime to restore files to their original paths and clean up empty category folders.</li>
+  <li><strong>Auto-Organize Watch Mode and System Tray:</strong> Optional background watcher waits for downloads to finish saving and unlocks before sorting automatically, with quick controls in the Windows system tray.</li>
+  <li><strong>Zero Overwrites:</strong> Safely appends <code>(1)</code>, <code>(2)</code>, etc. on filename collisions and supports cross-drive moves.</li>
+</ul>
 
-- **Safe detection** — finds your Downloads folder via `dirs`; you can pick a
-  different folder. Only top-level files are scanned; sub-folders,
-  `desktop.ini`, and active downloads (`.crdownload`, `.part`, `.tmp`,
-  `.opdownload`) are ignored.
-- **Smart categories** — Installers, Archives, Documents, Images, Media, Code,
-  and Other (case-insensitive extension matching).
-- **SHA-256 duplicates** — same-size files are compared with a cheap 4 KB
-  partial hash first, then a full hash, and duplicates are flagged in the
-  preview.
-- **Safe moves** — category folders are created only when needed, existing
-  names get ` (1)`, ` (2)`, … suffixes instead of being overwritten, and
-  cross-drive moves fall back to copy + delete.
-- **Auto-Organize (watch mode)** — a debounced background watcher sorts new
-  files automatically. Files are only moved once they have been quiet for the
-  configured delay (2.5 s by default) and can be opened without a Windows file
-  lock. The setting and delay persist across restarts, and every automatic move
-  is recorded in SQLite so **Undo Last Sort** still restores it.
-- **System tray** — open the window, toggle Auto-Organize, or quit from the tray
-  icon. The UI refreshes automatically whenever the watcher sorts a file.
-- **Undo** — every batch is recorded in a bundled SQLite database in the app
-  data directory. Undo restores files and removes empty category folders.
-- **Dry-run dashboard** — dark-mode UI with summary cards, category / duplicate
-  filters, bulk selection, and a full destination preview.
-
-## Development
-
-```bash
-npm install
-npm run dev          # Vite dev server on :1420
-```
-
-In another terminal:
-
-```bash
-cd src-tauri
-cargo tauri dev      # requires the Tauri CLI
-```
-
-## Verification builds
-
-```bash
-npm run build        # TypeScript check + Vite production bundle
-cd src-tauri && cargo check
-```
-
-## Local installer builds
-
-`bundle.createUpdaterArtifacts` is disabled in `src-tauri/tauri.conf.json`, so
-NSIS / MSI bundles can be produced locally without updater signing keys:
-
-```bash
-cd src-tauri && cargo tauri build
-```
-
-## Architecture
-
-```
-src-tauri/src/
-  scanner.rs     folder detection, filtering, categorization, hash duplicates
-  organizer.rs   conflict-safe moves, cross-drive fallback, undo
-  watcher.rs     debounced notify watcher, lock checks, auto-sort events
-  db.rs          SQLite batch history and persisted settings
-  lib.rs         #[tauri::command] handlers, tray icon, app builder
-  main.rs        Windows GUI entry point
-src/
-  App.tsx        dashboard state and action handlers
-  components/    TopBar, SummaryCards, FilterBar, FileTable, Toast, badges
-  lib/api.ts     typed invoke wrappers and native folder picker
-  types.ts       shared TypeScript models
-```
+<h2>Installation</h2>
+<ol>
+  <li>Download <code>DropTidy_0.1.0_x64-setup.exe</code> from the <strong>Assets</strong> section below.</li>
+  <li>Run the installer. Because this is an unsigned open-source release, Windows SmartScreen may prompt you on first run. Click <strong>More info</strong> and then <strong>Run anyway</strong>.</li>
+</ol>
