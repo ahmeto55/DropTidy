@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  @apply bg-[#0f1117] text-slate-200 antialiased;
+  font-family: "Segoe UI", Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-white/10;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-white/20;
+}
+
+@layer components {
+  .panel {
+    @apply rounded-xl border border-white/[0.07] bg-[#151821] shadow-[0_1px_0_0_rgba(255,255,255,0.03)_inset];
+  }
+
+  .icon-btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-white/[0.08] bg-white/[0.03] px-3 py-2 text-sm font-medium text-slate-300 transition-all duration-150 hover:border-white/[0.16] hover:bg-white/[0.07] hover:text-white disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-white/[0.08] disabled:hover:bg-white/[0.03];
+  }
+
+  .primary-btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-sky-500 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-sky-500/20 transition-all duration-150 hover:bg-sky-400 hover:shadow-sky-500/30 disabled:cursor-not-allowed disabled:opacity-40 disabled:shadow-none;
+  }
+
+  .checkbox {
+    @apply h-4 w-4 cursor-pointer rounded border-white/20 bg-white/5 text-sky-500 accent-sky-500 transition-colors focus:ring-2 focus:ring-sky-500/40;
+  }
+}

@@ -1,0 +1,23 @@
+[package]
+name = "droptidy"
+version = "0.1.0"
+description = "DropTidy — safely organize your Downloads folder"
+authors = ["DropTidy"]
+edition = "2021"
+rust-version = "1.77.2"
+
+[lib]
+name = "droptidy_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["tray-icon", "image-png"] }
+tauri-plugin-dialog = "2"
+serde = { version = "1", features = ["derive"] }
+dirs = "6"
+sha2 = "0.10"
+notify = "7"
+rusqlite = { version = "0.32", features = ["bundled"] }
